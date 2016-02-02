@@ -60,6 +60,9 @@ config :logger, level: :info
 #
 #     config :pxblog, Pxblog.Endpoint, root: "."
 
+# Hash the passwords really well in production
+config :comeonin, bcrypt_log_rounds: 14
+
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 import_config "prod.secret.exs"
