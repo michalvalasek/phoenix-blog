@@ -4,6 +4,8 @@ defmodule Pxblog.User do
   import Comeonin.Bcrypt, only: [hashpwsalt: 1]
 
   schema "users" do
+    has_many :posts, Pxblog.Post
+
     field :username, :string
     field :email, :string
     field :password_digest, :string

@@ -2,6 +2,8 @@ defmodule Pxblog.Post do
   use Pxblog.Web, :model
 
   schema "posts" do
+    belongs_to :user, Pxblog.User
+    
     field :title, :string
     field :body, :string
 
