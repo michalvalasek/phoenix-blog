@@ -89,7 +89,7 @@ defmodule Pxblog.PostController do
 
   defp invalid_user(conn) do
     conn
-    |> put_flash(:error, "Invalid User!")
+    |> put_flash(:error, "Invalid user!")
     |> redirect(to: page_path(conn, :index))
     |> halt
   end
