@@ -1,7 +1,6 @@
 <h2>Show post</h2>
 
 <ul>
-
   <li>
     <strong>Title:</strong>
     <%= @post.title %>
@@ -11,8 +10,17 @@
     <strong>Body:</strong>
     <%= markdown(@post.body) %>
   </li>
-
 </ul>
+
+<hr>
+
+<%= for comment <- @post.comments do %>
+  <%= render Pxblog.CommentView, "comment.html", comment: comment %>
+<% end %>
+
+<hr>
+
+<%= render Pxblog.CommentView, "form.html", changeset: @comment_changeset, action: post_comment_path(@conn, :create, @post) %>
 
 <%= link "Edit", to: user_post_path(@conn, :edit, @user, @post) %>
 <%= link "Back", to: user_post_path(@conn, :index, @user) %>

@@ -3,6 +3,7 @@ defmodule Pxblog.Post do
 
   schema "posts" do
     belongs_to :user, Pxblog.User
+    has_many :comments, Pxblog.Comment
 
     field :title, :string
     field :body, :string
