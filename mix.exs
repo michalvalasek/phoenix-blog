@@ -18,8 +18,7 @@ defmodule Pxblog.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Pxblog, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :comeonin, :ex_machina]]
+     applications: app_list(Mix.env)]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,7 +37,8 @@ defmodule Pxblog.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:comeonin, "~> 2.1"},
-     {:ex_machina, "~> 0.6.1", only: :test}]
+     {:ex_machina, "~> 0.6", only: :test},
+     {:earmark, "~> 0.2"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
@@ -51,4 +51,9 @@ defmodule Pxblog.Mixfile do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"]]
   end
+
+  defp app_list(:test), do: [:ex_machina | app_list]
+  defp app_list(_), do: app_list
+  defp app_list, do: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
+                 :phoenix_ecto, :postgrex, :comeonin]
 end
