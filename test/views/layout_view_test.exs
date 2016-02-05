@@ -3,11 +3,11 @@ defmodule Pxblog.LayoutViewTest do
 
   alias Pxblog.LayoutView
   alias Pxblog.User
-  alias Pxblog.TestHelper
+  alias Pxblog.Factory
 
   setup do
-    {:ok, role} = TestHelper.create_role(%{name: "User", admin: false})
-    {:ok, user} = TestHelper.create_user(role, %{username: "test", password: "test", password_confirmation: "test", email: "test@test.com"})
+    role = Factory.create(:role)
+    user = Factory.create(:user, role: role)
     conn = conn()
     {:ok, conn: conn, user: user}
   end
@@ -24,8 +24,8 @@ defmodule Pxblog.LayoutViewTest do
     refute LayoutView.current_user(conn)
   end
 
-  test "deletes the user session", %{conn: conn} do
-    user = Repo.get_by(User, %{username: "test"})
+  test "deletes the user session", %{conn: conn, user: user} do
+    user = Repo.get_by(User, %{username: user.username})
     conn = delete conn, session_path(conn, :delete, user)
 
     refute get_session(conn, :current_user)
