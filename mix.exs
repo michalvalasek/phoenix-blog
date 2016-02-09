@@ -56,5 +56,5 @@ defmodule Pxblog.Mixfile do
   defp app_list(:test), do: [:ex_machina | app_list]
   defp app_list(_), do: app_list
   defp app_list, do: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                 :phoenix_ecto, :postgrex, :comeonin]
+                 :phoenix_ecto, :postgrex, :comeonin, :earmark]
 end
